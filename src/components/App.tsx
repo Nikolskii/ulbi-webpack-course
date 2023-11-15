@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
+import balloonsImg from '@/assets/balloons.png';
+import fileImg from '@/assets/file.jpg';
+import ErrorImg from '@/assets/error.svg';
+
 import classes from './App.module.scss';
 
 export const App = () => {
@@ -10,6 +14,13 @@ export const App = () => {
 
   return (
     <div>
+      <div>
+        <img width={100} src={balloonsImg} alt={balloonsImg} />
+        <img width={100} src={fileImg} alt={fileImg} />
+      </div>
+      <div>
+        <ErrorImg width={100} height={100} />
+      </div>
       <Link to={'/about'}>About</Link>
       <br />
       <Link to={'/shop'}>Shop</Link>

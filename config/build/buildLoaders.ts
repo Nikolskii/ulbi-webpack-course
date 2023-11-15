@@ -6,6 +6,33 @@ import { BuildOptions } from './types/types';
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
   const isDev = options.mode === 'development';
 
+  const assetLoader = {
+    test: /\.(png|jpg|jpeg|gif)$/i,
+    type: 'asset/resource'
+  };
+
+  const svgLoader = {
+    test: /\.svg$/,
+    use: [
+      {
+        loader: '@svgr/webpack',
+        options: {
+          icon: true
+          // svgoConfig: {
+          //   plugins: [
+          //     {
+          //       name: 'convertColors',
+          //       params: {
+          //         currentColor: true
+          //       }
+          //     }
+          //   ]
+          // }
+        }
+      }
+    ]
+  };
+
   const cssLoaderWithModule = {
     loader: 'css-loader',
     options: {
@@ -36,7 +63,9 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
 
   return [
     // Порядок имеет значение
+    assetLoader,
     scssLoader,
-    tsLoader
+    tsLoader,
+    svgLoader
   ];
 }
