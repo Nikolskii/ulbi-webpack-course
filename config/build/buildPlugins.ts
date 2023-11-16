@@ -2,9 +2,10 @@ import webpack, { Configuration, DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import ReactRefreshPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 import { BuildOptions } from './types/types';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions): Configuration['plugins'] {
   const isDev = mode === 'development';
@@ -27,6 +28,7 @@ export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions):
     plugins.push(new webpack.ProgressPlugin());
     // Выносит проверку типов в отдельный процесс, не нагружая сборку
     plugins.push(new ForkTsCheckerWebpackPlugin());
+    plugins.push(new ReactRefreshPlugin());
   }
 
   if (isProd) {

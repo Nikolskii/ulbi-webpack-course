@@ -8,6 +8,8 @@ export function buildDevServer(options: BuildOptions): DevServerConfiguration {
     open: true,
     // Для React Router
     // Если раздавать статику через nginx, то надо делать проксирование на index.html
-    historyApiFallback: true
+    historyApiFallback: true,
+    // Hot module Replacement. Обновляет приложение без перезагрузки приложения
+    hot: true
   };
 }
