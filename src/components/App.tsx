@@ -7,6 +7,11 @@ import ErrorImg from '@/assets/error.svg';
 
 import classes from './App.module.scss';
 
+// Не попадет в бандл, потому что не вызывается (Tree Shaking)
+function TODO() {
+  console.log('Todo Function');
+}
+
 export const App = () => {
   const [count, setCount] = useState<number>(0);
 
