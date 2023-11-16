@@ -12,8 +12,15 @@ export const App = () => {
 
   const increment = () => setCount(prev => prev + 1);
 
+  if (__ENV__ === 'development') {
+    // addDevtools();
+  }
+
   return (
     <div>
+      <h1>Platform: {__PLATFORM__}</h1>
+      {__PLATFORM__ === 'desktop' && <p>is desktop platform</p>}
+      {__PLATFORM__ === 'mobile' && <p>is mobile platform</p>}
       <div>
         <img width={100} src={balloonsImg} alt={balloonsImg} />
         <img width={100} src={fileImg} alt={fileImg} />

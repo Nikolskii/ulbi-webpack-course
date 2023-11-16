@@ -1,18 +1,24 @@
-import webpack, { Configuration } from 'webpack';
+import webpack, { Configuration, DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import { BuildOptions } from './types/types';
 
-export function buildPlugins(options: BuildOptions): Configuration['plugins'] {
-  const isDev = options.mode === 'development';
-  const isProd = options.mode === 'production';
-  const { analyzer } = options;
+export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions): Configuration['plugins'] {
+  const isDev = mode === 'development';
+  const isProd = mode === 'production';
 
   const plugins: Configuration['plugins'] = [
     new HtmlWebpackPlugin({
-      template: options.paths.html
+      template: paths.html
+    }),
+    // Подменяет глобальные переменные, которые мы используем в коде на те значения,
+    // котоые мы задаем на этапе сборки. Полезно, чтобы не попадал лишний код в сборку.
+    // Например, для mobile, когда desktop
+    new DefinePlugin({
+      __PLATFORM__: JSON.stringify(platform),
+      __ENV__: JSON.stringify(mode)
     })
   ];
 
