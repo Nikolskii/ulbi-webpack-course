@@ -74,11 +74,20 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     exclude: /node_modules/
   };
 
+  const babelLoader = {
+    test: /\.tsx?$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader'
+    }
+  };
+
   return [
     // Порядок имеет значение
     assetLoader,
     scssLoader,
-    tsLoader,
+    // tsLoader,
+    babelLoader,
     svgLoader
   ];
 }
