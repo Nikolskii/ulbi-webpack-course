@@ -57,7 +57,15 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     // ts-loader умеет обрабатывать JSX,
     // без использования TS нужен babel-loader
     test: /\.tsx?$/,
-    use: 'ts-loader',
+    use: [
+      {
+        loader: 'ts-loader',
+        options: {
+          // Без проверки типов
+          transpileOnly: isDev
+        }
+      }
+    ],
     exclude: /node_modules/
   };
 

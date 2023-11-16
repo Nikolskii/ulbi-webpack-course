@@ -8,7 +8,7 @@ import ErrorImg from '@/assets/error.svg';
 import classes from './App.module.scss';
 
 // Не попадет в бандл, потому что не вызывается (Tree Shaking)
-function TODO() {
+function TODO(a: number) {
   console.log('Todo Function');
 }
 
