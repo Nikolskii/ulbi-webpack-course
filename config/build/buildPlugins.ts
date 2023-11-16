@@ -1,3 +1,4 @@
+import path from 'path';
 import webpack, { Configuration, DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
@@ -13,7 +14,8 @@ export function buildPlugins({ mode, paths, analyzer, platform }: BuildOptions):
 
   const plugins: Configuration['plugins'] = [
     new HtmlWebpackPlugin({
-      template: paths.html
+      template: paths.html,
+      favicon: path.resolve(paths.public, 'favicon.ico')
     }),
     // Подменяет глобальные переменные, которые мы используем в коде на те значения,
     // котоые мы задаем на этапе сборки. Полезно, чтобы не попадал лишний код в сборку.
