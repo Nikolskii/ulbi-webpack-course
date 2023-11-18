@@ -3,6 +3,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ReactRefreshTypeScript from 'react-refresh-typescript';
 
 import { BuildOptions } from './types/types';
+import { buildBabelLoader } from './babel/buildBabelLoader';
 
 export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
   const isDev = options.mode === 'development';
@@ -74,13 +75,15 @@ export function buildLoaders(options: BuildOptions): ModuleOptions['rules'] {
     exclude: /node_modules/
   };
 
-  const babelLoader = {
-    test: /\.tsx?$/,
-    exclude: /node_modules/,
-    use: {
-      loader: 'babel-loader'
-    }
-  };
+  // const babelLoader = {
+  //   test: /\.tsx?$/,
+  //   exclude: /node_modules/,
+  //   use: {
+  //     loader: 'babel-loader'
+  //   }
+  // };
+
+  const babelLoader = buildBabelLoader(options);
 
   return [
     // Порядок имеет значение
